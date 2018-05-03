@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+
+//API's
 import { BASE_API_GITHUB } from '../app.api'
 
+//MODELS
+import { Owner } from '../model/owner';
 import { Repository } from '../model/repository';
 
 @Component({
@@ -13,9 +17,13 @@ export class MakeCvGithubComponent implements OnInit {
 
   onibusJson: String = "";
 
-  repositories: Repository[] = [];
+  owner:Owner;
+  repositories: Repository[];
 
-  constructor(private http:Http) {}
+  constructor(private http:Http) {
+    this.owner = new Owner;
+    this.repositories = [];
+  }
 
   ngOnInit() {}
 
@@ -23,8 +31,6 @@ export class MakeCvGithubComponent implements OnInit {
     var that = this;
     var stream = this.http.get(`${BASE_API_GITHUB}users/RodrigoAmora/repos`);
     stream.subscribe(function(res) {
-       //console.log(JSON.stringify(res.json()));
-
        for (var i = 0; i < res.json().length; i++) {
          var repository = new Repository();
          repository.description = res.json()[i].description;
@@ -36,9 +42,20 @@ export class MakeCvGithubComponent implements OnInit {
          that.repositories.push(repository);
        }
 
-       console.log(that.repositories);
+       that.owner.avatar_url = res.json()[0]['owner']['avatar_url'];
+       that.owner.gists_url = res.json()[0]['owner']['gists_url'];
+       that.owner.id = res.json()[0]['owner']['id'];
+       that.owner.html_url = res.json()[0]['owner']['html_url'];
+       that.owner.id = res.json()[0]['owner']['id'];
+
        that.onibusJson = JSON.stringify(res.json());
     });
+
+    this.buildCV();
+  }
+
+  buildCV() {
+    
   }
 
 }
