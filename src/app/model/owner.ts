@@ -1,3 +1,5 @@
+import { Repository } from './repository';
+
 export class Owner {
 
     public avatar_url:String;
@@ -6,4 +8,11 @@ export class Owner {
     public id:Number;
     public login:String;
     
+    public repositories: Repository[];
+    public totalRepositories:Number;
+
+    getTotalRepositories() {
+        this.totalRepositories = this.repositories.length;
+    }
+
 }

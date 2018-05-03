@@ -1,13 +1,48 @@
-<br>
-<div class="card container col-6 text-center">
-  <h2>CV - GITHUB</h2>
-  <hr>
+<h1 class="text-center">CV - GITHUB</h1>
 
-  <form class="card-block" (ngSubmit)="consultProfile()"  #formulario="ngForm">
-      <div class="form-group">
-          <input class="form-control" type="text" placeholder="Type the user name...">
-      </div>
+<div class="row">
+  <div class="card container col-6 text-center">
+    <h2>MAKE YOUR CV GITHUB</h2>
+    <hr>
 
-      <button class="btn" type="submit">MAKE</button>
-  </form>
+    <form class="card-block" (ngSubmit)="consultProfile()" #formulario="ngForm">
+        <div class="form-group">
+            <input class="form-control" id="name" type="text" [(ngModel)]="name" name="name" placeholder="Type the user name...">
+        </div>
+
+        <button class="btn" type="submit">MAKE</button>
+    </form>
+  </div>
+</div>
+
+<br><br>
+
+<div class="row" *ngIf="owner">
+  <div class="container col-12 text-center">
+    <div>
+      <img src="{{owner.avatar_url}}" width="110" height="110">
+      <p>
+        <strong>Name:</strong> {{owner.login}}<br>
+        <strong>URL Profile:</strong> {{owner.html_url}}<br>
+        <!--<strong>URL Gists:</strong> {{owner.gists_url}}-->
+      </p>
+    </div>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th><strong>Name</strong></th>
+                  <th><strong>Language</strong></th>
+                  <th><strong>URL</strong></th>
+              </tr>
+          </thead>
+
+          <tbody>
+              <tr [ngStyle]="{'cursor': 'pointer'}" *ngFor="let repo of owner.repositories, let i = index">
+                  <td>{{repo.name}}</td>
+                  <td>{{repo.language}}</td>
+                  <td>{{repo.url}}</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
 </div>
