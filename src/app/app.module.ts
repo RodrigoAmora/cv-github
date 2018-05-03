@@ -5,11 +5,13 @@ import { RoutingModule } from './app.router';
 
 //COMPONENTS
 import { AppComponent } from './app.component';
+import { MakeCvGithubComponent } from './make-cv-github/make-cv-github.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MakeCvGithubComponent
   ],
   imports: [
     BrowserModule
