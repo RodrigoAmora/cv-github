@@ -1,3 +1,13 @@
-<p>
-  make-cv-github works!
-</p>
+<br>
+<div class="card container col-6 text-center">
+  <h2>CV - GITHUB</h2>
+  <hr>
+
+  <form class="card-block" (ngSubmit)="consultProfile()"  #formulario="ngForm">
+      <div class="form-group">
+          <input class="form-control" type="text" placeholder="Type the user name...">
+      </div>
+
+      <button class="btn" type="submit">MAKE</button>
+  </form>
+</div>

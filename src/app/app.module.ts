@@ -1,6 +1,8 @@
 //MODULES
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule, Http } from '@angular/http';
 import { RoutingModule } from './app.router';
 
 //COMPONENTS
@@ -14,7 +16,10 @@ import { MakeCvGithubComponent } from './make-cv-github/make-cv-github.component
     MakeCvGithubComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
