@@ -36,7 +36,11 @@ export class MakeCvGithubComponent implements OnInit {
     stream.subscribe(function(res) {
        for (var i = 0; i < res.json().length; i++) {
          var repository = new Repository();
-         repository.description = res.json()[i].description;
+         if (res.json()[i].description == null || res.json()[i].description == "") {
+          repository.description = "No description.";
+         } else {
+          repository.description = res.json()[i].description;
+         }
          repository.full_name = res.json()[i].full_name;
          repository.language = res.json()[i].language;
          repository.name = res.json()[i].name;
