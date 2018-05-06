@@ -50,7 +50,8 @@ export class MakeCvGithubComponent implements OnInit {
        }
 
        that.owner.avatar_url = res.json()[0]['owner']['avatar_url'];
-       that.owner.gists_url = res.json()[0]['owner']['gists_url'];
+       //that.owner.gists_url = res.json()[0]['owner']['gists_url'];
+       that.owner.gists_url = "https://gist.github.com/"+that.name;
        that.owner.html_url = res.json()[0]['owner']['html_url'];
        that.owner.id = res.json()[0]['owner']['id'];
        that.owner.login = res.json()[0]['owner']['login'];
