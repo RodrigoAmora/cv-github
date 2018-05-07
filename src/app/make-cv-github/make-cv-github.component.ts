@@ -62,8 +62,7 @@ export class MakeCvGithubComponent implements OnInit {
       that.owner.getTotalRepositories();
     }, error => {
       that.errorGithub = new ErrorGithub;
-      that.errorGithub.message = "Error!";
-      console.log(error.json());
+      that.errorGithub.message = error.json().message;
     });
 
     this.newClient.emit(this.owner);
