@@ -27,7 +27,7 @@
 
             <div class="col-3 col-md-6 text-left">
                 <p>
-                    <strong>Name:</strong>{{owner.login}}<br>
+                    <strong>Name:</strong> {{owner.login}}<br>
                     <strong>URL Profile:</strong> <a href="{{owner.html_url}}" target="_blank">{{owner.html_url}}</a> <br>
                     <strong>URL Gists:</strong> <a href="{{owner.gists_url}}" target="_blank">{{owner.gists_url}}</a> <br>
                     <!--<strong>URL Gists:</strong> {{owner.gists_url}}-->
@@ -58,5 +58,11 @@
                 </table>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="errorGithub">
+    <div class="container col-12 col-md-12 text-center">
+        <h3>User not found!</h3>
     </div>
 </div>
