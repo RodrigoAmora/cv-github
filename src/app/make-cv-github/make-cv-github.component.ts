@@ -44,7 +44,7 @@ export class MakeCvGithubComponent implements OnInit {
          repository.full_name = res.json()[i].full_name;
          repository.language = res.json()[i].language;
          repository.name = res.json()[i].name;
-         repository.url = res.json()[i].url;
+         repository.url = res.json()[i].html_url;
 
          that.repositories.push(repository);
        }

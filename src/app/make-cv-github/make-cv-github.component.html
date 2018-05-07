@@ -7,7 +7,7 @@
 
     <form class="card-block" (ngSubmit)="consultProfile()" #formulario="ngForm">
         <div class="form-group">
-            <input class="form-control" id="name" type="text" [(ngModel)]="name" name="name" placeholder="Type the user name...">
+            <input class="form-control" id="name" type="text" [(ngModel)]="name" name="name" placeholder="Type a user name...">
         </div>
 
         <button class="btn btn-primary btn-lg page-scroll" type="submit">Consult User</button>
@@ -27,9 +27,9 @@
 
             <div class="col-3 col-md-6 text-left">
                 <p>
-                    <strong>Name:</strong> {{owner.login}}<br>
-                    <strong>URL Profile:</strong> {{owner.html_url}}<br>
-                    <strong>URL Gists:</strong> {{owner.gists_url}}<br>
+                    <strong>Name:</strong>{{owner.login}}<br>
+                    <strong>URL Profile:</strong> <a href="{{owner.html_url}}" target="_blank">{{owner.html_url}}</a> <br>
+                    <strong>URL Gists:</strong> <a href="{{owner.gists_url}}" target="_blank">{{owner.gists_url}}</a> <br>
                     <!--<strong>URL Gists:</strong> {{owner.gists_url}}-->
                 </p>
             </div>
@@ -52,7 +52,7 @@
                         <tr [ngStyle]="{'cursor': 'pointer'}" *ngFor="let repo of owner.repositories, let i = index">
                             <td>{{repo.name}}</td>
                             <td>{{repo.language}}</td>
-                            <td>{{repo.url}}</td>
+                            <td><a href="{{repo.url}}" target="_blank">{{repo.url}}</a></td>
                         </tr>
                     </tbody>
                 </table>
