@@ -28,10 +28,7 @@ export class MakeCvGithubComponent implements OnInit {
   ngOnInit() {}
 
   consultProfile() {
-    this.errorGithub = null;
-    this.owner = null;
-    this.repositories = null;
-
+    this.cleanVariables();
     var that = this;
     var stream = this.http.get(`${BASE_API_GITHUB}users/`+this.name+`/repos`);
     stream.subscribe((res) => {
@@ -70,6 +67,12 @@ export class MakeCvGithubComponent implements OnInit {
 
   buildCV() {
     
+  }
+
+  cleanVariables() {
+    this.errorGithub = null;
+    this.owner = null;
+    this.repositories = null;
   }
 
 }
