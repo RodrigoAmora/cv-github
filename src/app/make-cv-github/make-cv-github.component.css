@@ -1,3 +1,11 @@
 .avatar_profile {
     border-radius: 10px;
 }
+
+.msg-user-not-found {
+    border: 2px solid red;
+    border-radius: 10px;
+    background-color: tomato;
+    color: rgb(161, 37, 18);
+    opacity: 0.8;
+}
