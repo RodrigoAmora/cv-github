@@ -27,9 +27,14 @@ export class MakeCvGithubComponent implements OnInit {
 
   ngOnInit() {}
 
+  buildCV() {
+    
+  }
+  
   consultProfile() {
     this.cleanVariables();
     
+    var that = this;
     this.http.get(`${BASE_API_GITHUB}users/`+this.name).subscribe((res) => {
       that.owner = new Owner;
       that.owner.avatar_url = res.json()['avatar_url'];
@@ -40,21 +45,27 @@ export class MakeCvGithubComponent implements OnInit {
       that.owner.id = res.json()['id'];
       that.owner.login = res.json()['login'];
       that.owner.name = res.json()['name'];
-    }), error => {
+    }, error => {
       that.errorGithub = new ErrorGithub;
       that.errorGithub.message = error.json().message;
-    };
+    });
 
-    var that = this;
+    this.consultRepositories(that); 
+    this.newClient.emit(this.owner);
+  }
+
+  consultRepositories(that) {
     this.http.get(`${BASE_API_GITHUB}users/`+this.name+`/repos`).subscribe((res) => {
       that.repositories = [];
       for (var i = 0; i < res.json().length; i++) {
-        var repository = new Repository();
+        var repository = new Repository;
+
         if (res.json()[i].description == null || res.json()[i].description == "") {
-        repository.description = "No description.";
+          repository.description = "No description.";
         } else {
-        repository.description = res.json()[i].description;
+          repository.description = res.json()[i].description;
         }
+
         repository.full_name = res.json()[i].full_name;
         repository.language = res.json()[i].language;
         repository.name = res.json()[i].name;
@@ -66,12 +77,6 @@ export class MakeCvGithubComponent implements OnInit {
       that.owner.repositories = that.repositories;
       that.owner.getTotalRepositories();
     });
-
-    this.newClient.emit(this.owner);
-  }
-
-  buildCV() {
-    
   }
 
   cleanVariables() {
