@@ -27,17 +27,21 @@
 
             <div class="col-3 col-md-6 text-left">
                 <p>
-                    <strong>Name:</strong> {{owner.login}}<br>
+                    <strong>Name:</strong> {{owner.name}}<br>
+                    <strong>Login:</strong> {{owner.login}}<br>
                     <strong>URL Profile:</strong> <a href="{{owner.html_url}}" target="_blank">{{owner.html_url}}</a> <br>
                     <strong>URL Gists:</strong> <a href="{{owner.gists_url}}" target="_blank">{{owner.gists_url}}</a> <br>
-                    <!--<strong>URL Gists:</strong> {{owner.gists_url}}-->
+                    <strong>Bio:</strong> {{owner.bio}}
                 </p>
             </div>
         </div>
+        
+        <hr>
 
         <div class="row justify-content-center text-center">
             <div class="col-9">
                 <h3 class="text-center">Repositories</h3>
+                <strong>Total repositories:</strong> {{owner.totalRepositories}}
 
                 <table class="table">
                     <thead>

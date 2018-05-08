@@ -29,10 +29,24 @@ export class MakeCvGithubComponent implements OnInit {
 
   consultProfile() {
     this.cleanVariables();
-    var that = this;
-    var stream = this.http.get(`${BASE_API_GITHUB}users/`+this.name+`/repos`);
-    stream.subscribe((res) => {
+    
+    this.http.get(`${BASE_API_GITHUB}users/`+this.name).subscribe((res) => {
       that.owner = new Owner;
+      that.owner.avatar_url = res.json()['avatar_url'];
+      that.owner.bio = res.json()['bio'];
+      //that.owner.gists_url = res.json()[0]['owner']['gists_url'];
+      that.owner.gists_url = "https://gist.github.com/"+that.name;
+      that.owner.html_url = res.json()['html_url'];
+      that.owner.id = res.json()['id'];
+      that.owner.login = res.json()['login'];
+      that.owner.name = res.json()['name'];
+    }), error => {
+      that.errorGithub = new ErrorGithub;
+      that.errorGithub.message = error.json().message;
+    };
+
+    var that = this;
+    this.http.get(`${BASE_API_GITHUB}users/`+this.name+`/repos`).subscribe((res) => {
       that.repositories = [];
       for (var i = 0; i < res.json().length; i++) {
         var repository = new Repository();
@@ -49,17 +63,8 @@ export class MakeCvGithubComponent implements OnInit {
         that.repositories.push(repository);
       }
 
-      that.owner.avatar_url = res.json()[0]['owner']['avatar_url'];
-      //that.owner.gists_url = res.json()[0]['owner']['gists_url'];
-      that.owner.gists_url = "https://gist.github.com/"+that.name;
-      that.owner.html_url = res.json()[0]['owner']['html_url'];
-      that.owner.id = res.json()[0]['owner']['id'];
-      that.owner.login = res.json()[0]['owner']['login'];
       that.owner.repositories = that.repositories;
       that.owner.getTotalRepositories();
-    }, error => {
-      that.errorGithub = new ErrorGithub;
-      that.errorGithub.message = error.json().message;
     });
 
     this.newClient.emit(this.owner);
