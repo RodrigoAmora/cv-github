@@ -19,19 +19,31 @@
 <br><br>
 
 <div class="row" *ngIf="owner">
-  <div class="container col-12 col-md-12 text-center">
+  <div class="col-12 col-md-12 text-center">
       <div class="row">
-            <div class="col-3 col-md-6">
+            <div class="col-6 col-md-3">
                 <img src="{{owner.avatar_url}}" class="avatar_profile" width="110" height="110">
             </div>
 
-            <div class="col-3 col-md-6 text-left">
+            <div class="col-6 col-md-3 text-left">
                 <p>
                     <strong>Name:</strong> {{owner.name}}<br>
                     <strong>Login:</strong> {{owner.login}}<br>
                     <strong>URL Profile:</strong> <a href="{{owner.html_url}}" target="_blank">{{owner.html_url}}</a> <br>
                     <strong>URL Gists:</strong> <a href="{{owner.gists_url}}" target="_blank">{{owner.gists_url}}</a> <br>
+                </p>
+            </div>
+
+            <div class="col-6 col-md-3 text-left">
+                <p>
                     <strong>Bio:</strong> {{owner.bio}}
+                </p>
+            </div>
+
+            <div class="col-6 col-md-3 text-left">
+                <p>
+                    <strong>Total Follwers:</strong> {{owner.totalFollwers}}<br>
+                    <strong>Total Follwing:</strong> {{owner.totalFollwing}}<br>
                 </p>
             </div>
         </div>

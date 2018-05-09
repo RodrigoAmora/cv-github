@@ -19,7 +19,9 @@ export class MakeCvGithubComponent implements OnInit {
   errorGithub:ErrorGithub;
   owner:UserGithub;
   repositories: Repository[];
-  
+  follwers:UserGithub[];
+  follwing:UserGithub[];
+
   name:String;
   newClient = new EventEmitter();
 
@@ -50,9 +52,9 @@ export class MakeCvGithubComponent implements OnInit {
       that.errorGithub.message = error.json().message;
     });
 
-    if (this.owner != null) {
-      this.consultRepositories(that);
-    }
+    this.consultRepositories(that);
+    this.getFollwers(that);
+    this.getFollwing(that);
 
     this.newClient.emit(this.owner);
   }
@@ -86,6 +88,44 @@ export class MakeCvGithubComponent implements OnInit {
     this.errorGithub = null;
     this.owner = null;
     this.repositories = null;
+  }
+
+  getFollwers(that) {
+    this.http.get(`${BASE_API_GITHUB}users/`+this.name+`/followers`).subscribe((res) => {
+      that.owner.followers = [];
+      for (var i = 0; i < res.json().length; i++) {
+        var follwer = new UserGithub;
+        follwer.avatar_url = res.json()[i]['avatar_url'];
+        //that.owner.gists_url = res.json()[0]['owner']['gists_url'];
+        follwer.gists_url = "https://gist.github.com/"+that.name;
+        follwer.html_url = res.json()[i]['html_url'];
+        follwer.id = res.json()[i]['id'];
+        follwer.login = res.json()[i]['login'];
+
+        that.owner.followers.push(follwer);
+      }
+
+      that.owner.totalFollwers = that.owner.followers.length;
+    });
+  }
+
+  getFollwing(that) {
+    this.http.get(`${BASE_API_GITHUB}users/`+this.name+`/following`).subscribe((res) => {
+      that.owner.following = [];
+      for (var i = 0; i < res.json().length; i++) {
+        var follwer = new UserGithub;
+        follwer.avatar_url = res.json()[i]['avatar_url'];
+        //that.owner.gists_url = res.json()[0]['owner']['gists_url'];
+        follwer.gists_url = "https://gist.github.com/"+that.name;
+        follwer.html_url = res.json()[i]['html_url'];
+        follwer.id = res.json()[i]['id'];
+        follwer.login = res.json()[i]['login'];
+
+        that.owner.following.push(follwer);
+      }
+
+      that.owner.totalFollwing = that.owner.following.length;
+    });
   }
 
 }
