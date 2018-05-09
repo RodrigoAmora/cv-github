@@ -6,7 +6,7 @@ import { BASE_API_GITHUB } from '../app.api'
 
 //MODELS
 import { ErrorGithub } from '../model/error-github';
-import { Owner } from '../model/owner';
+import { UserGithub } from '../model/user-github';
 import { Repository } from '../model/repository';
 
 @Component({
@@ -17,7 +17,7 @@ import { Repository } from '../model/repository';
 export class MakeCvGithubComponent implements OnInit {
 
   errorGithub:ErrorGithub;
-  owner:Owner;
+  owner:UserGithub;
   repositories: Repository[];
   
   name:String;
@@ -36,7 +36,7 @@ export class MakeCvGithubComponent implements OnInit {
     
     var that = this;
     this.http.get(`${BASE_API_GITHUB}users/`+this.name).subscribe((res) => {
-      that.owner = new Owner;
+      that.owner = new UserGithub;
       that.owner.avatar_url = res.json()['avatar_url'];
       that.owner.bio = res.json()['bio'];
       //that.owner.gists_url = res.json()[0]['owner']['gists_url'];
@@ -50,7 +50,10 @@ export class MakeCvGithubComponent implements OnInit {
       that.errorGithub.message = error.json().message;
     });
 
-    this.consultRepositories(that); 
+    if (this.owner != null) {
+      this.consultRepositories(that);
+    }
+
     this.newClient.emit(this.owner);
   }
 

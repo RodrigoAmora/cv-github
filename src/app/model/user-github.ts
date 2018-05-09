@@ -1,6 +1,6 @@
 import { Repository } from './repository';
 
-export class Owner {
+export class UserGithub {
 
     public avatar_url:String;
     public bio:String;
