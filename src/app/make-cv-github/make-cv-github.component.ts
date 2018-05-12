@@ -18,9 +18,6 @@ export class MakeCvGithubComponent implements OnInit {
 
   errorGithub:ErrorGithub;
   owner:UserGithub;
-  repositories: Repository[];
-  follwers:UserGithub[];
-  follwing:UserGithub[];
 
   name:String;
   newClient = new EventEmitter();
@@ -55,13 +52,12 @@ export class MakeCvGithubComponent implements OnInit {
     this.consultRepositories(that);
     this.getFollwers(that);
     this.getFollwing(that);
-
     this.newClient.emit(this.owner);
   }
 
   consultRepositories(that) {
     this.http.get(`${BASE_API_GITHUB}users/`+this.name+`/repos`).subscribe((res) => {
-      that.repositories = [];
+      that.owner.repositories = [];
       for (var i = 0; i < res.json().length; i++) {
         var repository = new Repository;
 
@@ -76,10 +72,9 @@ export class MakeCvGithubComponent implements OnInit {
         repository.name = res.json()[i].name;
         repository.url = res.json()[i].html_url;
 
-        that.repositories.push(repository);
+        that.owner.repositories.push(repository);
       }
 
-      that.owner.repositories = that.repositories;
       that.owner.getTotalRepositories();
     });
   }
@@ -87,7 +82,6 @@ export class MakeCvGithubComponent implements OnInit {
   cleanVariables() {
     this.errorGithub = null;
     this.owner = null;
-    this.repositories = null;
   }
 
   getFollwers(that) {
