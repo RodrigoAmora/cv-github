@@ -2,13 +2,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { RoutingModule } from './app.router';
 
 //COMPONENTS
 import { AppComponent } from './app.component';
 import { MakeCvGithubComponent } from './make-cv-github/make-cv-github.component';
-
 
 @NgModule({
   declarations: [
@@ -24,4 +23,4 @@ import { MakeCvGithubComponent } from './make-cv-github/make-cv-github.component
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

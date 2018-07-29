@@ -45,6 +45,10 @@
                     <strong>Total Follwers:</strong> {{owner.totalFollwers}}<br>
                     <strong>Total Follwing:</strong> {{owner.totalFollwing}}<br>
                 </p>
+
+                <form class="card-block" (ngSubmit)="buildCV()">
+                    <button class="btn btn-primary btn-lg page-scroll" type="submit">Generate PDF</button>
+                </form>
             </div>
         </div>
         

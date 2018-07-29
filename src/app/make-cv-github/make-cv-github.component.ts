@@ -1,6 +1,10 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Http } from '@angular/http';
 
+//pdfMake
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
 //API's
 import { BASE_API_GITHUB } from '../app.api'
 
@@ -27,7 +31,21 @@ export class MakeCvGithubComponent implements OnInit {
   ngOnInit() {}
 
   buildCV() {
-    
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    var textPDF = this.name+"\n";
+    var totalFollwers = this.owner.totalFollwers;
+    var totalFollwing = this.owner.totalFollwing;
+    textPDF += "Total following: "+totalFollwing+"\n";
+    textPDF += "Total follwers: "+totalFollwers+"\n";
+    for(var i = 0; i < this.owner.repositories.length; i++) {
+      textPDF += "Name: "+this.owner.repositories[i].name+"\n";
+      textPDF += "Language: "+this.owner.repositories[i].language+"\n";
+      textPDF += "URL: "+this.owner.repositories[i].url+"\n";
+      textPDF += "Description: "+this.owner.repositories[i].description+"\n";
+    }
+
+    var pdf = { content: textPDF };
+    pdfMake.createPdf(pdf).download();
   }
   
   consultProfile() {
