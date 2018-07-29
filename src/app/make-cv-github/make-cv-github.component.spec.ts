@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MakeCvGithubComponent } from './make-cv-github.component';
 
 describe('MakeCvGithubComponent', () => {
