@@ -1,84 +1,88 @@
-<div class="row" style="padding-top: 10px;">
-    <div class="card container col-6 text-center">
-        <h2>MAKE YOUR CV GITHUB</h2>
-        <hr>
-        <form class="card-block" (ngSubmit)="consultProfile()" #formulario="ngForm">
-            <div class="form-group">
-                <input class="form-control" id="name" type="text" [(ngModel)]="name" name="name" placeholder="Type a user name...">
-            </div>
-            <button class="btn btn-primary btn-lg page-scroll" type="submit">Consult User</button>
-        </form>
-        <br>
-    </div>
-</div>
+<div class="container  text-center" style="padding-top: 10px;">
+    <h2>MAKE YOUR CV GITHUB</h2>
 
-<br><br>
-
-<div class="row" *ngIf="owner">
-  <div class="col-12 col-md-12 text-center">
-      <div class="row">
-            <div class="col-6 col-md-3">
-                <img src="{{owner.avatar_url}}" class="avatar_profile" width="110" height="110">
-            </div>
-
-            <div class="col-6 col-md-3 text-left">
-                <p>
-                    <strong>Name:</strong> {{owner.name}}<br>
-                    <strong>Login:</strong> {{owner.login}}<br>
-                    <strong>URL Profile:</strong> <a href="{{owner.html_url}}" target="_blank">{{owner.html_url}}</a> <br>
-                    <strong>URL Gists:</strong> <a href="{{owner.gists_url}}" target="_blank">{{owner.gists_url}}</a> <br>
-                </p>
-            </div>
-
-            <div class="col-6 col-md-3 text-left">
-                <p>
-                    <strong>Bio:</strong> {{owner.bio}}
-                </p>
-            </div>
-
-            <div class="col-6 col-md-3 text-left">
-                <p>
-                    <strong>Total Follwers:</strong> {{owner.totalFollwers}}<br>
-                    <strong>Total Follwing:</strong> {{owner.totalFollwing}}<br>
-                </p>
-
-                <form class="card-block" (ngSubmit)="buildCV()">
-                    <button class="btn btn-primary btn-lg page-scroll" type="submit">Generate PDF</button>
-                </form>
-            </div>
-        </div>
-        
-        <hr>
-
-        <div class="row justify-content-center text-center">
-            <div class="col-9">
-                <h3 class="text-center">Repositories</h3>
-                <strong>Total repositories:</strong> {{owner.totalRepositories}}
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><strong>Name</strong></th>
-                            <th><strong>Language</strong></th>
-                            <th><strong>URL</strong></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr [ngStyle]="{'cursor': 'pointer'}" *ngFor="let repo of owner.repositories, let i = index">
-                            <td>{{repo.name}}</td>
-                            <td>{{repo.language}}</td>
-                            <td><a href="{{repo.url}}" target="_blank">{{repo.url}}</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <div class="row">
+        <div class="card container col-6">
+            <h3>Concult user</h3>
+            <hr>
+            <form class="card-block" (ngSubmit)="consultProfile()" #formulario="ngForm">
+                <div class="form-group">
+                    <input class="form-control" id="name" type="text" [(ngModel)]="name" name="name" placeholder="Type a user name...">
+                </div>
+                <button class="btn btn-primary btn-lg page-scroll" type="submit">Consult User</button>
+            </form>
+            <br>
         </div>
     </div>
-</div>
 
-<div class="row" *ngIf="errorGithub">
-    <div class="container col-12 col-md-9 text-center">
-        <h3 class="msg-user-not-found">User wasn't found!</h3>
+    <br><br>
+
+    <div class="row" *ngIf="owner">
+        <div class="col-12 col-md-12 text-center">
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <img src="{{owner.avatar_url}}" class="avatar_profile" width="110" height="110">
+                </div>
+
+                <div class="col-6 col-md-3 text-left">
+                    <p>
+                        <strong>Name:</strong> {{owner.name}}<br>
+                        <strong>Login:</strong> {{owner.login}}<br>
+                        <strong>URL Profile:</strong> <a href="{{owner.html_url}}" target="_blank">{{owner.html_url}}</a> <br>
+                        <strong>URL Gists:</strong> <a href="{{owner.gists_url}}" target="_blank">{{owner.gists_url}}</a> <br>
+                    </p>
+                </div>
+
+                <div class="col-6 col-md-3 text-left">
+                    <p>
+                        <strong>Bio:</strong> {{owner.bio}}
+                    </p>
+                </div>
+
+                <div class="col-6 col-md-3 text-left">
+                    <p>
+                        <strong>Total Follwers:</strong> {{owner.totalFollwers}}<br>
+                        <strong>Total Follwing:</strong> {{owner.totalFollwing}}<br>
+                    </p>
+
+                    <form class="card-block" (ngSubmit)="buildCV()">
+                        <button class="btn btn-primary btn-lg page-scroll" type="submit">Generate PDF</button>
+                    </form>
+                </div>
+            </div>
+                
+            <hr>
+
+            <div class="row justify-content-center text-center">
+                <div class="col-9">
+                    <h3 class="text-center">Repositories</h3>
+                    <strong>Total repositories:</strong> {{owner.totalRepositories}}
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><strong>Name</strong></th>
+                                <th><strong>Language</strong></th>
+                                <th><strong>URL</strong></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr [ngStyle]="{'cursor': 'pointer'}" *ngFor="let repo of owner.repositories, let i = index">
+                                <td>{{repo.name}}</td>
+                                <td>{{repo.language}}</td>
+                                <td><a href="{{repo.url}}" target="_blank">{{repo.url}}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="errorGithub">
+        <div class="container col-12 col-md-9 text-center">
+            <h3 class="msg-user-not-found">User wasn't found!</h3>
+        </div>
     </div>
 </div>
