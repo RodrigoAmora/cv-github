@@ -1,3 +1,5 @@
+<a href="https://www.codacy.com/project/RodrigoAmora/cv-github/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RodrigoAmora/cv-github&amp;utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/622a77ef71294faca2dcf27e8f52c956"/></a>
+
 # CV-Github
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
